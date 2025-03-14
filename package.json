@@ -30,6 +30,12 @@
 
     "react-scripts": "^5.0.0"
 
+  },
+
+  "dependencies": {
+
+    "@testing-library/jest-dom": "^6.6.3"
+
   }
 
 }

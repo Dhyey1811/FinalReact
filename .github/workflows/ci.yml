@@ -1,4 +1,4 @@
-name: React CI with Coverage
+name: React CI/CD Pipeline
 
 on:
   push:
@@ -13,37 +13,31 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      # Step 1: Checkout the code
       - name: Checkout repository
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
 
-      # Step 2: Set up Node.js
-      - name: Set up Node.js
-        uses: actions/setup-node@v2
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
         with:
-          node-version: '16'  # Replace with the version of Node.js you're using
+          node-version: 20
 
-      # Step 3: Install dependencies
       - name: Install dependencies
         run: |
+          cd src
           npm install
 
-      # Step 4: Run tests and generate coverage report
-      - name: Run tests and collect coverage
+      - name: Install dependencies
         run: |
-          npm test -- --coverage --watchAll=false
+          npm install  
+          npm ci
 
-      # Step 5: Upload the coverage report as an artifact
-      - name: Upload coverage report
-        uses: actions/upload-artifact@v2
-        with:
-          name: coverage-report
-          path: ./coverage/  # Ensure this path points to your coverage folder
+      - name: Fix react-scripts Permissions
+        run: chmod +x node_modules/.bin/react-scripts
 
-      # Optional: Step 6 to publish coverage to Codecov
-      # Uncomment the following section if you want to upload coverage to Codecov
-      # - name: Upload to Codecov
-      #   uses: codecov/codecov-action@v2
-      #   with:
-      #     file: ./coverage/lcov-report/index.html  # Modify if needed to match your coverage report
+      - name: Install Testing Library Dependencies
+        run: npm install --save-dev @testing-library/react @testing-library/jest-dom @testing-library/user-event
 
+
+      - name: Coverage
+        run: |
+          npm run coverage

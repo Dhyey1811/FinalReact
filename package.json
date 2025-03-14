@@ -1,0 +1,36 @@
+{
+
+  "name": "final-project",
+
+  "version": "1.0.0",
+
+  "main": "index.js",
+
+  "scripts": {
+
+    "test": "react-scripts test --watchAll=false"
+
+  },
+
+  "keywords": [],
+
+  "author": "",
+
+  "license": "ISC",
+
+  "description": "",
+
+  "devDependencies": {
+
+    "@testing-library/react": "^13.4.0",
+
+    "jest": "^29.0.0",
+
+    "jsdom": "^26.0.0",
+
+    "react-scripts": "^5.0.0"
+
+  }
+
+}
+
